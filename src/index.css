@@ -1,48 +1,59 @@
 @import "tailwindcss";
 
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: "Poppins", var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+    --color-surface: #121212;
+    --color-border: rgba(255, 255, 255, 0.1);
+  }
 
 :root {
+  --background: #ffffff; /* Light mode bg */
+  --foreground: #171717; /* Light mode text */
+  
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(3, 3, 3, 0.87);
-  --background: #171717;
-  --forground: #171717;
-  
-  @theme inline{
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
-  }
-@media(prefers-color-scheme: dark){
-  :root{
-    --background: #0a0a0a;
-    --foreground: #0a0a0a;
-  }
-}
-body{
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-.scrollbar-hide::-webkit-scrollbar{
-  display: none;
-}
-.scrollbar-hide{
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Poppins", system-ui, -apple-system, sans-serif;
+  margin: 0; 
+}
+
+/* Scrollbars and chevron */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animations */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
 .animate-marquee {
   display: inline-flex;
   align-items: center;
@@ -51,35 +62,63 @@ body{
   will-change: transform;
 }
 
-.marquee-mask {
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-}
-
 .animate-marquee:hover {
   animation-play-state: paused;
 }
 
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  background: rba(10,10,10,0.4);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255,255,255, 0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Hero Section */
 .BannerImage-bg {
   position: relative;
   overflow: hidden;
+  background-size: cover; /* Added to ensure the inline image fills the area */
+  background-position: center right;
+  z-index: 1;
 }
+
+h1, h2, h3{
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
 .BannerImage-bg::before {
   content: '';
   position: absolute;
   inset: 0;
-
-  background-image: url('/BannerImage.avif');
+  /* We inherit the background from the parent div */
+  background-image: inherit; 
   background-repeat: no-repeat;
-  background-position: right center;
-  background-size: contain;
-
-  filter: blur(6px);
+  background-position: inherit;
+  background-size: inherit;
+  filter: blur(30px);
   transform: scale(1.08);
   opacity: 0.8;
-
-  z-index: 0;
+  z-index: -1;
 }
-.social_media_imgs{
-  background-color: white;
 
+.BannerImage-bg svg path{
+  transition: none;
+}
+
+.social_media_imgs {
+  background-color: white;
+}
+.social_media_imgs svg{
+  color: var(--foreground);
+  transition: color 0.2s ease;
+}
+.social_media_imgs svg:hover{
+  color: #6366F1;
+}
+.social_media_imgs:hover{
+  box-shadow: 0 0 20px rgba(99,102,241, 0.3);
+  transform: translate(-2px);
+  transition: all 0.3s ease;
 }

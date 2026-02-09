@@ -10,26 +10,27 @@ export default function Login() {
     const navigate =useNavigate();
 
     
-    const handleSubmit=(e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
-        const storedData =localStorage.getItem("FormData:");
 
-        if(!storedData){
-            toast.error('No user Found. please sign up first');
-            return;
+        try{
+            const response = await fetch('http://localhost:5000/api/auth/Login',{
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email, password}),
+            });
+            const data = await response.json();
+            if(!response.ok){
+                throw new Error(data.message || 'Login failed');
+            }
+            toast.success('Login successful');
+            localStorage.setItem('user', JSON.stringify(data.user));
+            navigate('/store');
+        } catch(error){
+            toast.error(error.message);
         }
-        const user =JSON.parse(storedData);
-
-        if(email !== user.email){
-            toast.error('Email is incorrect');
-            return;
-        }
-        if(password !== user.password){
-            toast.error('Password is incorrect');
-            return;
-        }
-        toast.success('User logged');
-        navigate('/Catalogue');
     };
 
   return (

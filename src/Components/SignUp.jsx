@@ -61,7 +61,25 @@ export default function SignUp() {
     try {
       await SignupSchema.validate(formData, { abortEarly: false });
 
-      localStorage.setItem('FormData:', JSON.stringify(formData));
+      const response = await fetch('http://localhost:5000/api/auth/signup',{
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.fName,
+          lastName: formData.lName,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+      const data = await response.json();
+
+      if(!response.ok){
+        throw new Error(data.message || 'signup failed');
+      }
+      toast.success('User registered successfully');
+      navigate('/Login');
 
       setFormData({
         fName: '',
@@ -71,20 +89,15 @@ export default function SignUp() {
         confirmPassword: '',
         profile_picture: '',
       });
-
-      toast.success('User registered successfully');
-      navigate('/Login');
     } catch (error) {
       if (error.inner) {
         const newErrors = {};
-
         error.inner.forEach((err) => {
           if (!newErrors[err.path]) {
             newErrors[err.path] = err.message;
             toast.error(err.message);
           }
         });
-
         setErrors(newErrors);
       } else {
         toast.error(error.message);

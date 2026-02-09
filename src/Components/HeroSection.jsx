@@ -4,15 +4,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function HeroSection() {
   const heroImages = [
-    { title: "Glow Boosting", subtitle: "Radiant Skin From Within", image: "img1.avif" },
-    { title: "Hairfall & Thinning", subtitle: "Root-to-Tip Care", image: "img2.avif" },
-    { title: "Weight Management", subtitle: "Healthy Metabolism", image: "img3.avif" },
-    { title: "Skin Firming", subtitle: "Anti-Aging Solutions", image: "img4.avif" },
-    { title: "Protein Power", subtitle: "Muscle Recovery & Growth", image: "img5.avif" },
-    { title: "Multivitamins", subtitle: "Daily Vitality", image: "img6.avif" },
-    { title: "Ayurveda & Herbs", subtitle: "Ancient Traditions", image: "img7.avif" },
-    { title: "Sleep Better", subtitle: "Restful Night Support", image: "img8.avif" },
-    { title: "Lean Body Support", subtitle: "Fitness & Fat Loss", image: "img9.avif" },
+    { title: "Smartphones", subtitle: "Latest Flagships", image: "phones.avif" },
+    { title: "Laptops", subtitle: "Power & Performance", image: "laptops.avif" },
+    { title: "Smartwatches", subtitle: "Stay Connected", image: "watches.avif" },
+    { title: "Audio & Music", subtitle: "Immersive Sound", image: "audio.avif" },
+    { title: "Gaming", subtitle: "Level Up Your Play", image: "gaming.avif" },
+    { title: "Tablets", subtitle: "Creativity on the Go", image: "tablets.avif" },
+    { title: "Cameras", subtitle: "Capture Every Moment", image: "cameras.avif" },
+    { title: "Accessories", subtitle: "Essential Tech Gear", image: "accessories.avif" },
   ];
 
   const scrollRef = useRef(null);

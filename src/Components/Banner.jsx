@@ -6,29 +6,35 @@ export default function Banner() {
     <div>
       <section className='w-full relative'>
         <div className='text-white text-xs'>
-            <div className='max-w-7xl mx-auto px-4 py-2 flex items-center gap-6'>
+            <div className='max-w-7xl mx-auto justify-end py-2 flex items-center gap-6'>
                 <div className='overflow-hidden flex-1 marquee-mask'>
-                    <div className='animate-marquee whitespace-nowrap flex gap-8'>
-                        <span><em></em></span>
-                        <span><em></em></span>
-                        <span><em></em></span>
-                        <span><em></em></span>
+                    <div className='animate-marquee whitespace-nowrap flex gap-5'>
+                        <span><em>Extra 10% Off on App Orders • Limited Time Sale</em></span>
+                        <span><em>Free Shipping Above ₹299 • Shop Top Brands</em></span>
+                        <span><em>The Future is Here • Shop Next-Gen Devices & Accessories</em></span>
+                        <span><em>Upgrade Your Gear • Latest Tech at Unbeatable Prices</em></span>
+                        <span><em>No-Cost EMI Available • Get Your Hands on Premium Tech Today</em></span>
+                        <span><em>Certified Refurbished & Brand New • Trusted Tech with Full Warranty</em></span>
+                        <span><em>Top-Tier Audio & Wearables • Experience Sound Like Never Before</em></span>                    
                     </div>
-                    <div className='hidden md:flex items-centre gap-3 shrink-0'>
-                        <button className='bg-black text-[#fc2779] px-3 py-1 rounded-full font-semibold text-xs hover:opacity-90 transition-transform transform hover:-translate-y-px'>
+                    <div className='hidden md:flex justify-self-end gap-4 shrink-0'>
+                        <button className='bg-black text-[#fc2779] px-3 py-1 rounded-full font-semibold text-xs hover:opacity-90 transition-transform transform hover:-translate-y-px hover:bg-white'>
                             Get App
                         </button>
-                        <button className='border border-white px-3 py-1 rounded-full font-semibold text-xs hover:bg-blue-700 hover:text-[#fc2779] transition-transform transform hover:-translate-y-1'>
+                        <button className='border border-white px-3 py-1 rounded-full font-semibold text-xs hover:bg-white hover:text-[#fc2779] transition-transform transform hover:-translate-y-1'>
                             Store Events
                         </button>
                     </div>
                 </div>
             </div>
-            <div className='relative p-4 bg-linear-to-4 from-blue-400 via-blue-300 to-orange-400 BannerImage-bg'>
+            <div 
+  className='relative p-4 bg-linear-to-4 from-blue-400 via-blue-400 to-orange-500 BannerImage-bg'
+  style={{ backgroundImage: "url('/BannerImage.avif')" }} 
+>
               <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 items-center gap-6">
                 <div className="text-center md:text-left p-4">
             <p className="text-sm font-semibold text-[#FC2779] mb-2 uppercase tracking-wide">
-              Wellness Sale
+              Biggest Sale
             </p>
             <h1 className="text-[36px] md:text-[40px] lg:text-[44px] leading-tight font-semibold text-pink-400 mb-3">
               Up To <span className="text-[#FC2779]">40% Off</span>
@@ -38,7 +44,7 @@ export default function Banner() {
             <p className="text-white text-[20px] md:text-[24px] mb-6 max-w-md mx-auto md:mx-0">
               Get deals on Phones, laptops etc.
             </p>
-            <Link to={'./Catalogue.jsx'} className="bg-[#FC2779] text-white px-7 py-3 rounded-md font-semibold shadow hover:shadow-lg hover:scale-[1.10] transition">
+            <Link to={'/store/products'} className="bg-[#FC2779] text-white px-7 py-3 rounded-md font-semibold shadow hover:shadow-lg hover:scale-[1.10] transition">
               Shop Now
             </Link>
           </div>
@@ -49,7 +55,7 @@ export default function Banner() {
             preserveAspectRatio='none'
             xmlns='http://www.w3.org/2000/svg'>
                 <path
-                fill='#0000ff'
+                fill='#00D0FF'
                 fillOpacity='0.9'
                 d="M0,96C80,96,160,128,240,128C320,128,400,96,480,80C560,64,640,64,720,80C800,96,880,128,960,144C1040,160,1120,160,1200,144C1280,128,1360,96,1400,80L1440,64L1440,180L0,180Z"/>
                 <path
