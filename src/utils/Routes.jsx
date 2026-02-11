@@ -6,6 +6,7 @@ import StoreLayout from "../store/features/StoreLayout";
 import Catalogue from "../store/features/Catalogue";
 import Products from "../store/pages/Productpage";
 import CategoryPage from '../store/pages/CategoryPage';
+import AddProduct from "../store/pages/AddProduct";
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     },
     { path: '/SignUp', element: <SignUp /> },
     { path: '/Login', element: <Login /> },
+    {
+                path: '/admin/add-product',
+                element: <AddProduct/>
+            },
     {
         path: '/store',
         element: <StoreLayout />,
@@ -30,7 +35,8 @@ const router = createBrowserRouter([
             {
                 path: 'category/:categoryName',
                 element: <CategoryPage/>
-            }
+            },
+            
         ]
     }
 ]);
