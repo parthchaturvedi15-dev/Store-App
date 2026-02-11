@@ -5,10 +5,10 @@ import { Link } from "react-router-dom"; // Import Link
 
 export default function HeroSection() {
   const heroImages = [
-    { title: "Smartphones", subtitle: "Latest Flagships", image: "phones.avif" },
-    { title: "Laptops", subtitle: "Power & Performance", image: "laptops.avif" },
+    { title: "phone", subtitle: "Latest Flagships", image: "phones.avif" },
+    { title: "laptop", subtitle: "Power & Performance", image: "laptops.avif" },
     { title: "Smartwatches", subtitle: "Stay Connected", image: "watches.avif" },
-    { title: "Audio", subtitle: "Immersive Sound", image: "audio.avif" }, // Simplified title for URL
+    { title: "Audio", subtitle: "Immersive Sound", image: "audio.avif" },
     { title: "Gaming", subtitle: "Level Up Your Play", image: "gaming.avif" },
     { title: "Tablets", subtitle: "Creativity on the Go", image: "tablets.avif" },
     { title: "Cameras", subtitle: "Capture Every Moment", image: "cameras.avif" },
