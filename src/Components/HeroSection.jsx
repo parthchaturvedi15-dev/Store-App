@@ -1,13 +1,14 @@
 "use client";
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom"; // Import Link
 
 export default function HeroSection() {
   const heroImages = [
     { title: "Smartphones", subtitle: "Latest Flagships", image: "phones.avif" },
     { title: "Laptops", subtitle: "Power & Performance", image: "laptops.avif" },
     { title: "Smartwatches", subtitle: "Stay Connected", image: "watches.avif" },
-    { title: "Audio & Music", subtitle: "Immersive Sound", image: "audio.avif" },
+    { title: "Audio", subtitle: "Immersive Sound", image: "audio.avif" }, // Simplified title for URL
     { title: "Gaming", subtitle: "Level Up Your Play", image: "gaming.avif" },
     { title: "Tablets", subtitle: "Creativity on the Go", image: "tablets.avif" },
     { title: "Cameras", subtitle: "Capture Every Moment", image: "cameras.avif" },
@@ -37,22 +38,25 @@ export default function HeroSection() {
             className="flex gap-8 overflow-x-auto scroll-smooth py-6 pl-12 pr-12 scrollbar-hide"
           >
             {heroImages.map((item, index) => (
-              <div key={index} className="flex flex-col items-center shrink-0 cursor-pointer">
+              <Link 
+                key={index} 
+                to={`/store/category/${item.title.toLowerCase()}`} 
+                className="flex flex-col items-center shrink-0 cursor-pointer group"
+              >
                 <img
                   src={item.image}
                   alt={item.title}
-                  width={24}
-                  height={24}
                   loading="eager"
-                  className="md:w-32 md:h-32 object-cover shrink-0 hover:scale-110 transition-transform duration-500 rounded-full border-2 border-white shadow-sm"
+                  className="md:w-32 md:h-32 w-24 h-24 object-cover shrink-0 group-hover:scale-110 transition-transform duration-500 rounded-full border-2 border-white shadow-sm"
                 />
                 <div className="mt-3 text-center">
                   <p className="text-sm font-bold text-white leading-tight">{item.title}</p>
                   <p className="text-[10px] text-white mt-1">{item.subtitle}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
+
           <button
             onClick={() => scroll("right")}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-gray-800 text-white rounded-full p-2 shadow hover:scale-110 transition"
