@@ -11,6 +11,7 @@ export default function SignUp() {
     password: '',
     confirmPassword: '',
     profile_picture: '',
+    role: '',
   });
 
   const [errors, setErrors] = useState({});

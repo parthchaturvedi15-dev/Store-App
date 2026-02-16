@@ -12,6 +12,9 @@
 :root {
   --background: #ffffff; /* Light mode bg */
   --foreground: #171717; /* Light mode text */
+  --bg-primary: var(--background);
+  --text-primary: var(--foreground);
+
   
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -24,6 +27,12 @@
 
   
 }
+.dark{
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --bg-primary: #000000;
+  --text-primary: #ffffff;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -34,9 +43,11 @@
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--text-primary);
   font-family: "Poppins", system-ui, -apple-system, sans-serif;
-  margin: 0; 
+  margin: 0;
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Scrollbars and chevron */
@@ -67,9 +78,8 @@ body {
 }
 
 .marquee-mask {
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  background: rba(10,10,10,0.4);
-  backdrop-filter: blur(8px);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%);
+  background: rgba(10,10,10,0.4);
   border-top: 1px solid rgba(255,255,255, 0.05);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
@@ -78,7 +88,7 @@ body {
 .BannerImage-bg {
   position: relative;
   overflow: hidden;
-  background-size: cover; /* Added to ensure the inline image fills the area */
+  background-size: cover;
   background-position: center right;
   z-index: 1;
 }

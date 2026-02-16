@@ -5,6 +5,7 @@ import HeroSection from '../../Components/HeroSection';
 import CategorySection from '../../Components/CategorySection';
 import OffersSection from '../../Components/OfferSection';
 import Footer from '../../Components/Footer';
+import ThemeToggleBttn from '../../Components/ThemeButton';
 
 
 export default function StorePage() {
