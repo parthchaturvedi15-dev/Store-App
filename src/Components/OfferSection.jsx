@@ -41,9 +41,9 @@ export default function OffersSection() {
     items.map((offer) => (
       <div
         key={offer.title}
-        className="min-w-70 md:min-w-[320px] bg-black rounded-xl shadow hover:shadow-lg transition-transform transform hover:-translate-y-1"
-      >
-        <div className="h-40 md:h-44 overflow-hidden rounded-t-xl">
+        className="shrink-0 w-260px sm:w-280px md:w-[320px] bg-black rounded-xl shadow-md 
+          hover:shadow-xl transition hover:-translate-y-1snap-start">
+        <div className="h-36 sm:h-40 md:h-44 overflow-hidden rounded-t-xl">
           <img
             src={offer.image}
             alt={offer.title}
@@ -51,11 +51,11 @@ export default function OffersSection() {
           />
         </div>
 
-        <div className="p-6">
-          <h3 className="font-semibold text-[15px] md:text-[16px] text-white mb-1">
+        <div className="p-4 md:p-6">
+          <h3 className="font-semibold text-sm md:text-base text-white mb-1">
             {offer.title}
           </h3>
-          <p className="text-sm md:text-[14px] text-white">
+          <p className="text-xs md:text-sm text-gray-300">
             Across top  brands
           </p>
         </div>
@@ -63,60 +63,80 @@ export default function OffersSection() {
     ));
 
   return (
-    <section className="w-full bg-[#000000] py-14 md:py-16">
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-2xl md:text-[26px] font-semibold tracking-tight mb-8 text-center text-white">
+    <section className="w-full bg-[#000000] py-12 md:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-8 text-center text-white">
           Limited Time Deals
         </h2>
+        {/* first row*/}
         <div className="relative mb-8">
+          {/* left arrow only for desktop*/}
           <button
             onClick={() => scroll(scrollRef1, "left")}
-            className="absolute -left-2 md:-left-5 top-1/2 -translate-y-1/2 z-10 bg-black text-white rounded-full shadow-lg p-2 hover:scale-110 transition-transform"
+            className="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-10 
+                       bg-black/80 backdrop-blur-md text-white 
+                       rounded-full p-2 shadow-lg hover:scale-110 transition"
           >
             <ChevronLeft size={22} />
           </button>
+
           <div
             ref={scrollRef1}
-            className="flex gap-6 overflow-x-auto scroll-smooth px-1 scrollbar-hide"
+            className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth 
+                       scrollbar-hide snap-x snap-mandatory"
           >
             {renderOffers(firstLineOffers)}
           </div>
+          {/* right arrow*/}
           <button
             onClick={() => scroll(scrollRef1, "right")}
-            className="absolute -right-2 md:-right-5 top-1/2 -translate-y-1/2 z-10 bg-black text-white rounded-full shadow-lg p-2 hover:scale-110 transition-transform"
+            className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-10 
+                       bg-black/80 backdrop-blur-md text-white 
+                       rounded-full p-2 shadow-lg hover:scale-110 transition"
           >
             <ChevronRight size={22} />
           </button>
         </div>
+
+        {/*second */}
         <div className="relative">
           <button
             onClick={() => scroll(scrollRef2, "left")}
-            className="absolute -left-2 md:-left-5 top-1/2 -translate-y-1/2 z-10 bg-black text-white rounded-full shadow-lg p-2 hover:scale-110 transition-transform"
+            className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth 
+                       scrollbar-hide snap-x snap-mandatory"
           >
             <ChevronLeft size={22} />
           </button>
+
+
           <div
             ref={scrollRef2}
-            className="flex gap-6 overflow-x-auto scroll-smooth px-1 scrollbar-hide"
+            className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth 
+                       scrollbar-hide snap-x snap-mandatory"
           >
             {renderOffers(secondLineOffers)}
           </div>
+
           <button
             onClick={() => scroll(scrollRef2, "right")}
-            className="absolute -right-2 md:-right-5 top-1/2 -translate-y-1/2 z-10 bg-black text-white rounded-full shadow-lg p-2 hover:scale-110 transition-transform"
+            className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-10 
+                       bg-black/80 backdrop-blur-md text-white 
+                       rounded-full p-2 shadow-lg hover:scale-110 transition"
           >
             <ChevronRight size={22} />
           </button>
         </div>
+        
       </div>
-      <section className="mt-10">
-      <div className="bg-fuchsia-800 text-white text-center mx-auto px-6 md:px-10 py-3 rounded-lg w-fit hover:scale-105 transition-transform cursor-pointer ">
-        <h1 className="text-base md:text-lg font-medium tracking-wide">
-          Shop All Wellness
-        </h1>
-      </div>
+      {/*Call to action button*/}
+      <div className="mt-12 flex justify-center">
+      <div className="bg-fuchsia-700 text-white px-6 md:px-10 py-3 rounded-lg 
+                          hover:scale-105 transition cursor-pointer">
+            <h1 className="text-sm md:text-lg font-medium tracking-wide">
+              Shop All Wellness
+            </h1>
+          </div>
+    </div>
     </section>
-    </section>
-    
   );
 }

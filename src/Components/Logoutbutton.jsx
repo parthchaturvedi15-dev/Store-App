@@ -16,7 +16,7 @@ export default function LogoutButton() {
   return (
     <button
       onClick={handleLogout}
-      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-lg transition-colors duration-200 w-full text-left"
+      className="flex items-center gap-1 px-1 py-1 text-sm font-semibold hover:bg-red-800 bg-red-600 dark:hover:bg-red-800 rounded-full transition-colors duration-200 w-fit text-left"
     >
       <svg 
         xmlns="http://www.w3.org/2000/svg" 

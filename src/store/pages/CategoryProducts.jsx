@@ -9,7 +9,6 @@ export default function CategoryProducts() {
         {category}
       </h1>
 
-      {/* fetch category-based products here */}
     </section>
   );
 }

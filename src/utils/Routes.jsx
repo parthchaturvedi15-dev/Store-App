@@ -10,6 +10,8 @@ import AddProduct from "../store/pages/AddProduct";
 import AdminDashboard from "../pages/AdminDashboard";
 import Profile from "../pages/Profile";
 import ProtectedRoute from "../Components/ProtectedRoute";
+import ProductPageLayout from '../Components/ProductPageLayout';
+import CustomerCount from "../Components/CustomerCount";
 
 const router = createBrowserRouter([
   {
@@ -26,23 +28,29 @@ const router = createBrowserRouter([
   { path: "/Login", element: <Login /> },
 
   {
-    path: "/store",
-    element: <StoreLayout />,
-    children: [
-      {
-        index: true,
-        element: <Catalogue />,
-      },
-      {
-        path: "products",
-        element: <Products />,
-      },
-      {
-        path: "category/:categoryName",
-        element: <CategoryPage />,
-      },
-    ],
-  },
+  path: "/store",
+  element: <StoreLayout />,
+  children: [
+    {
+      index: true,
+      element: <Catalogue />,
+    },
+
+    {
+      element: <ProductPageLayout />,
+      children: [
+        {
+          path: "products",
+          element: <Products />,
+        },
+        {
+          path: "category/:categoryName",
+          element: <CategoryPage />,
+        },
+      ],
+    },
+  ],
+},
 
   {
     path: "/admin",
@@ -50,6 +58,12 @@ const router = createBrowserRouter([
       <ProtectedRoute allowedRoles={["admin"]}>
         <AdminDashboard />
       </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/admin/customers',
+    element: (
+      <CustomerCount/>
     ),
   },
 

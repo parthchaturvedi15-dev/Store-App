@@ -1,69 +1,184 @@
-import {useState}from 'react';
+import { useState } from "react";
 
-const AddProduct = ()=>{
-    const [formData, setFormData]=useState({
-        name: '',
-        category: '',
-        brand: '',
-        price: '',
-        description: '',
-        stock: '',
-        image: ''
-    });
+const AddProduct = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    category: "",
+    brand: "",
+    price: "",
+    description: "",
+    stock: "",
+    image: "",
+  });
 
-    const handleChange =(e)=>{
-        setFormData({...formData, [e.target.name]: e.target.value});
-    };
-    const handleImageChange = (e)=>{
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend =()=>{
-            setFormData({...formData, image: reader.result});
-        };
-        if(file)reader.readAsDataURL(file);
-    };
-    const handleSubmit = async (e)=>{
-        e.prevenetDefault();
-        try{
-            const response = await fetch('http://localhost:5000/api/products/add', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(formData),
-            });
-            if(response.ok){
-                alert('Product added successfully!');
-                setFormData({name: '', category: '', brand: '', price: '', description: '', stock: '', image: ''});
-            }
-        } catch(error){
-            console.error('Error adding product:', error);
-        }
-    };
- return (
-    <div className="max-w-2xl mx-auto p-8 bg-gray-900 text-white rounded-xl mt-10">
-      <h2 className="text-2xl font-bold mb-6">Add New Product to Inventory</h2>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
-        <input name="name" placeholder="Product Name" onChange={handleChange} className="p-2 rounded bg-gray-800 border border-gray-700" required />
-        
-        <div className="grid grid-cols-2 gap-4">
-          <input name="category" placeholder="Category (e.g., phone, laptop)" onChange={handleChange} className="p-2 rounded bg-gray-800 border border-gray-700" required />
-          <input name="brand" placeholder="Brand" onChange={handleChange} className="p-2 rounded bg-gray-800 border border-gray-700" required />
-        </div>
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-        <div className="grid grid-cols-2 gap-4">
-          <input name="price" type="number" placeholder="Price" onChange={handleChange} className="p-2 rounded bg-gray-800 border border-gray-700" required />
-          <input name="stock" type="number" placeholder="Stock Quantity" onChange={handleChange} className="p-2 rounded bg-gray-800 border border-gray-700" required />
-        </div>
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => setFormData({ ...formData, image: reader.result });
+    if (file) reader.readAsDataURL(file);
+  };
 
-        <textarea name="description" placeholder="Description" onChange={handleChange} className="p-2 rounded bg-gray-800 border border-gray-700 h-32" required />
-        
-        <label className="block text-sm text-gray-400">Upload Product Image</label>
-        <input type="file" accept="image/*" onChange={handleImageChange} className="text-sm" required />
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5000/api/products/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        alert("Product added successfully!");
+        setFormData({
+          name: "",
+          category: "",
+          brand: "",
+          price: "",
+          description: "",
+          stock: "",
+          image: "",
+        });
+      }
+    } catch (error) {
+      console.error("Error adding product:", error);
+    }
+  };
 
-        <button type="submit" className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-lg transition">
-          Save Product to Atlas
-        </button>
-      </form>
+  return (
+    <div className="w-full py-4 sm:py-6 bg-black h-full">
+      <div className="bg-gray-900 text-white rounded-2xl shadow-lg p-4 sm:p-8 border border-gray-700 shadow-blue-900/20">
+        <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center text-blue-400">
+          Add New Product
+        </h2>
+
+        <form onSubmit={handleSubmit} className="w-full">
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <tbody className="text-left">
+                <tr className="border-b border-gray-800">
+                  <td className="py-3 pr-4 font-semibold text-sm sm:text-base whitespace-nowrap">
+                    Product Name
+                  </td>
+                  <td className="py-3">
+                    <input
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full p-2 rounded bg-gray-800 border border-gray-700 focus:border-blue-500 outline-none transition"
+                      required
+                    />
+                  </td>
+                </tr>
+
+                <tr className="border-b border-gray-800">
+                  <td className="py-3 pr-4 font-semibold text-sm sm:text-base">
+                    Category
+                  </td>
+                  <td className="py-3">
+                    <input
+                      name="category"
+                      value={formData.category}
+                      onChange={handleChange}
+                      className="w-full p-2 rounded bg-gray-800 border border-gray-700 focus:border-blue-500 outline-none transition"
+                      required
+                    />
+                  </td>
+                </tr>
+
+                <tr className="border-b border-gray-800">
+                  <td className="py-3 pr-4 font-semibold text-sm sm:text-base">
+                    Brand
+                  </td>
+                  <td className="py-3">
+                    <input
+                      name="brand"
+                      value={formData.brand}
+                      onChange={handleChange}
+                      className="w-full p-2 rounded bg-gray-800 border border-gray-700 focus:border-blue-500 outline-none transition"
+                      required
+                    />
+                  </td>
+                </tr>
+
+                <tr className="border-b border-gray-800">
+                  <td className="py-3 pr-4 font-semibold text-sm sm:text-base">
+                    Price
+                  </td>
+                  <td className="py-3">
+                    <input
+                      name="price"
+                      type="number"
+                      value={formData.price}
+                      onChange={handleChange}
+                      className="w-full p-2 rounded bg-gray-800 border border-gray-700 focus:border-blue-500 outline-none transition"
+                      required
+                    />
+                  </td>
+                </tr>
+
+                <tr className="border-b border-gray-800">
+                  <td className="py-3 pr-4 font-semibold text-sm sm:text-base">
+                    Stock Qty
+                  </td>
+                  <td className="py-3">
+                    <input
+                      name="stock"
+                      type="number"
+                      value={formData.stock}
+                      onChange={handleChange}
+                      className="w-full p-2 rounded bg-gray-800 border border-gray-700 focus:border-blue-500 outline-none transition"
+                      required
+                    />
+                  </td>
+                </tr>
+
+                <tr className="border-b border-gray-800">
+                  <td className="py-3 pr-4 font-semibold text-sm sm:text-base align-top pt-5">
+                    Description
+                  </td>
+                  <td className="py-3">
+                    <textarea
+                      name="description"
+                      value={formData.description}
+                      onChange={handleChange}
+                      className="w-full p-2 rounded bg-gray-800 border border-gray-700 h-24 focus:border-blue-500 outline-none transition resize-none"
+                      required
+                    />
+                  </td>
+                </tr>
+
+                <tr>
+                  <td className="py-3 pr-4 font-semibold text-sm sm:text-base">
+                    Image
+                  </td>
+                  <td className="py-3">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="w-full text-xs sm:text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 transition cursor-pointer"
+                      required
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="flex justify-center mt-8">
+            <button
+              type="submit"
+              className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-12 rounded-lg transition-all active:scale-95 shadow-lg shadow-blue-900/30"
+            >
+              Save Product
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
+
 export default AddProduct;

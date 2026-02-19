@@ -23,7 +23,6 @@ export const AuthProvider = ({ children }) => {
   });
 
   const data = await response.json();
-  console.log("🔥 BACKEND RESPONSE:", data);
 
   if (!response.ok) {
     return { success: false, error: data.message };
@@ -34,14 +33,14 @@ export const AuthProvider = ({ children }) => {
     name: data.user.firstName,
     email: data.user.email,
     role: data.user.role,
-    profileImage: "/profileimage.jpg"
   };
-console.log("🔥 ROLE FROM BACKEND:", data.user.role);
+
   setUser(userData);
   localStorage.setItem("shop_user", JSON.stringify(userData));
 
   return { success: true, user: userData };
 };
+
   const signup = async (firstName, lastName, email, password) => {
     try {
       const response = await fetch('http://localhost:5000/api/Signup', {

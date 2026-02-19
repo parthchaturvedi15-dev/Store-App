@@ -9,6 +9,9 @@ export const ThemeProvider=({children})=>{
         const savedTheme =localStorage.getItem('theme');
         if(savedTheme){
             setTheme(savedTheme);
+        }else{
+            const prefersDark = window.watchMedia('(prefers-color-scheme: dark)').matches;
+            setTheme(prefersDark? 'dark': 'light');
         }
     }, []);
     useEffect(()=>{

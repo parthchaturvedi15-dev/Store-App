@@ -18,51 +18,75 @@ export default function HeroSection() {
   const scrollRef = useRef(null);
 
   const scroll = (direction) => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: direction === "left" ? -360 : 360, behavior: "smooth" });
-  };
+  if (!scrollRef.current) return;
+  scrollRef.current.scrollBy({
+    left: direction === "left"
+      ? -scrollRef.current.clientWidth
+      : scrollRef.current.clientWidth,
+    behavior: "smooth"
+  });
+};
 
   return (
-    <section className="py-10 bg-black">
-      <div className="max-w-7xl mx-auto px-10">
-        <div className="relative">
+    <section className="py-8 bg-white dark:bg-black transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative">
+
+        {/* Desktop Arrow*/}
           <button
-            onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black text-white rounded-full p-2 shadow hover:scale-110 transition"
-          >
-            <ChevronLeft size={24} />
-          </button>
+          onClick={() => scroll("left")}
+          className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-30 
+                     bg-black/80 dark:bg-white/80 backdrop-blur-md 
+                     text-white dark:text-black 
+                     rounded-full p-2 shadow-lg 
+                     hover:scale-110 transition"
+        >
+          <ChevronLeft size={18} />
+        </button>
+
 
           <div
-            ref={scrollRef}
-            className="flex gap-8 overflow-x-auto scroll-smooth py-6 pl-12 pr-12 scrollbar-hide"
-          >
-            {heroImages.map((item, index) => (
-              <Link 
-                key={index} 
-                to={`/store/category/${item.title.toLowerCase()}`} 
-                className="flex flex-col items-center shrink-0 cursor-pointer group"
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="eager"
-                  className="md:w-32 md:h-32 w-24 h-24 object-cover shrink-0 group-hover:scale-110 transition-transform duration-500 rounded-full border-2 border-white shadow-sm"
-                />
+          ref={scrollRef}
+          className="flex gap-6 sm:gap-8 overflow-x-auto scroll-smooth py-6 
+                     scrollbar-hide snap-x snap-mandatory"
+        >
+          {heroImages.map((item, index) => (
+            <Link
+              key={index}
+              to={`/store/category/${item.title.toLowerCase()}`}
+              className="flex flex-col items-center shrink-0 w-[120px] md:w-auto
+                         snap-start group transition"
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 
+                           object-cover rounded-full 
+                           border-2 border-gray-300 dark:border-white 
+                           shadow-md
+                           group-hover:scale-110 transition-transform duration-500"
+              />
                 <div className="mt-3 text-center">
-                  <p className="text-sm font-bold text-white leading-tight">{item.title}</p>
-                  <p className="text-[10px] text-white mt-1">{item.subtitle}</p>
-                </div>
-              </Link>
+                <p className="text-xs sm:text-sm font-semibold 
+                              text-black dark:text-white">
+                  {item.title}
+                </p>
+                <p className="text-[10px] sm:text-xs 
+                              text-gray-600 dark:text-gray-400 mt-1">
+                  {item.subtitle}
+                </p>
+              </div>
+            </Link>
             ))}
-          </div>
-
-          <button
-            onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-gray-800 text-white rounded-full p-2 shadow hover:scale-110 transition"
-          >
-            <ChevronRight size={24} />
-          </button>
+      <button
+          onClick={() => scroll("right")}
+          className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-30 
+                     bg-black/80 dark:bg-white/80 backdrop-blur-md 
+                     text-white dark:text-black 
+                     rounded-full p-2 shadow-lg 
+                     hover:scale-110 transition"
+        >
+          <ChevronRight size={18} />
+        </button>
         </div>
       </div>
     </section>
