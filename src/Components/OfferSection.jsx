@@ -24,14 +24,8 @@ export default function OffersSection() {
     { title: "Flat ₹500 Off", image: "product4.avif" },
     { title: "Free Gifts on Orders", image: "product5.avif" },
     { title: "Combo Deals", image: "product6.avif" },
-    { title: "B1G1 on Wellness Bestsellers", image: "product7.avif" },
-    { title: "Free Mini on Orders Above ₹799", image: "product8.avif" },
-    { title: "Supplements Starting @ ₹899", image: "product9.avif" },
-    { title: "Price Drop: Best of K-Beauty", image: "product10.avif" },
-    { title: "Gifts on Orders Above ₹2000", image: "product11.avif" },
-    { title: "Detox & Diet: Up to 20% Off", image: "product12.avif" },
-    { title: "New Launches: Early Access Deals", image: "product13.avif" },
-    { title: "Flash Sale: Luxe Beauty Deals", image: "product14.avif" },
+    { title: "Gifts on Orders Above ₹2000", image: "product7.avif" },
+    { title: "New Launches: Early Access Deals", image: "product8.avif" },
   ];
 
   const firstLineOffers = offers.slice(0, 6);
@@ -55,9 +49,6 @@ export default function OffersSection() {
           <h3 className="font-semibold text-sm md:text-base text-white mb-1">
             {offer.title}
           </h3>
-          <p className="text-xs md:text-sm text-gray-300">
-            Across top  brands
-          </p>
         </div>
       </div>
     ));
@@ -128,15 +119,6 @@ export default function OffersSection() {
         </div>
         
       </div>
-      {/*Call to action button*/}
-      <div className="mt-12 flex justify-center">
-      <div className="bg-fuchsia-700 text-white px-6 md:px-10 py-3 rounded-lg 
-                          hover:scale-105 transition cursor-pointer">
-            <h1 className="text-sm md:text-lg font-medium tracking-wide">
-              Shop All Wellness
-            </h1>
-          </div>
-    </div>
     </section>
   );
 }

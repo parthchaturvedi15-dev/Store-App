@@ -1,20 +1,19 @@
 'use client';
-import React, { useState, useRef, useEffect } from 'react'; // Added useEffect
+import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import LogoutButton from './Logoutbutton';
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function ProfileMenu({ openLoginModal, openSignupModal }) {
   const { user, loading } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const timeoutRef = useRef(null);
-  const menuRef = useRef(null); // Ref for the entire component container
+  const menuRef = useRef(null);
 
-  // --- FIX: Close when clicking outside ---
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // If the menu is open and the click is NOT inside the menu container, close it
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setIsOpen(false);
       }
@@ -27,7 +26,6 @@ export default function ProfileMenu({ openLoginModal, openSignupModal }) {
   if (loading) return <div className="w-8 h-8 rounded-full bg-gray-400 animate-pulse" />;
 
   const handleMouseEnter = () => {
-    // Only use hover logic on devices that actually support hovering (desktops)
     if (window.matchMedia("(hover: hover)").matches) {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       setIsOpen(true);
@@ -36,7 +34,7 @@ export default function ProfileMenu({ openLoginModal, openSignupModal }) {
 
   const handleMouseLeave = () => {
     if (window.matchMedia("(hover: hover)").matches) {
-      timeoutRef.current = setTimeout(() => setIsOpen(false), 300); // Reduced delay for better feel
+      timeoutRef.current = setTimeout(() => setIsOpen(false), 300);
     }
   };
 
@@ -46,7 +44,7 @@ export default function ProfileMenu({ openLoginModal, openSignupModal }) {
 
   return (
     <div 
-      ref={menuRef} // Attach ref here
+      ref={menuRef}
       className="relative" 
       onMouseEnter={handleMouseEnter} 
       onMouseLeave={handleMouseLeave}
@@ -54,10 +52,8 @@ export default function ProfileMenu({ openLoginModal, openSignupModal }) {
       <div className="cursor-pointer" onClick={toggleMenu}>
         {user ? (
           <img 
-            src={user.profileImage || "/profileimage.jpg"} 
-            className="w-8 h-8 rounded-full border-2 border-white object-cover" 
-            alt="Profile" 
-          />
+          src={user.profileImage ? `/${user.profileImage.replaceAll("\\","/")}` : "/profileimage.jpg"} 
+          className="w-8 h-8 rounded-full border-2 border-white object-cover" alt="Profile"/>
         ) : (
           <div className="border border-white px-3 py-1 rounded-full text-white font-semibold text-xs hover:bg-white hover:text-[#fc2779] transition">
             Login
@@ -66,17 +62,17 @@ export default function ProfileMenu({ openLoginModal, openSignupModal }) {
       </div>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50 text-gray-800">
+        <div className="absolute right-0 mt-5 w-48 bg-white rounded-lg shadow-xl py-2 z-50 text-gray-800">
           {user ? (
             <>
-              <div className="px-4 py-2 border-b border-gray-100">
-                <p className="text-sm font-bold truncate">{user.name}</p>
+              <div className="px-4 py-3 border-b border-gray-100">
+                <p className="text-md font-bold truncate">{user.name}</p>
                 <p className="text-xs text-gray-500 truncate">{user.email}</p>
               </div>
-              <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">My Profile</button>
-              <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">Orders</button>
-              <div onClick={() => setIsOpen(false)}>
-                 <LogoutButton />
+              <Link to='/profile' className="w-full text-left px-3 py-2 text-sm hover:bg-gray-100">My Profile</Link>
+              <Link to='profile/Orders' className="w-full text-left px-3 py-2 text-sm hover:bg-gray-100">Orders</Link>
+             <div className="w-fit px-2 mx-4 my-2 py-2 text-sm bg-red-500 cursor-pointer rounded-2xl">
+              <LogoutButton />
               </div>
             </>
           ) : (

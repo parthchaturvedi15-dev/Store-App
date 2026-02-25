@@ -26,16 +26,28 @@ export default function Banner() {
     <div className="relative">
       <section className='w-full relative overflow-hidden'>
         
-        <div className='absolute top-0 w-full z-30 bg-black/20 text-white text-sm'>
+        <div className='absolute top-0 w-full z-30 bg-black/70 text-white text-sm'>
           <div className='max-w-7xl mx-auto px-4 sm:px-6'>
-            <div className='overflow-hidden flex-1 marquee-mask'>
-              <div className='animate-marquee whitespace-nowrap flex gap-6 py-1'>
-                <span><em>Extra 10% Off on App Orders • Limited Time Sale</em></span>
-                <span><em>Free Shipping Above ₹299 • Shop Top Brands</em></span>
-                <span><em>The Future is Here • Shop Next-Gen Devices & Accessories</em></span>
-                <span><em>Upgrade Your Gear • Latest Tech at Unbeatable Prices</em></span>
-                <span><em>No-Cost EMI Available • Get Your Tech Today</em></span>
-              </div>
+            <div className='overflow-hidden marquee-mask'>
+              
+<div className='animate-marquee whitespace-nowrap flex gap-10 py-1'>
+  <div className="flex gap-10">
+    <span><em>Extra 10% Off on App Orders • Limited Time Sale</em></span>
+    <span><em>Free Shipping Above ₹299 • Shop Top Brands</em></span>
+    <span><em>The Future is Here • Shop Next-Gen Devices & Accessories</em></span>
+    <span><em>Upgrade Your Gear • Latest Tech at Unbeatable Prices</em></span>
+    <span><em>No-Cost EMI Available • Get Your Tech Today</em></span>
+  </div>
+
+  <div className="flex gap-10">
+    <span><em>Extra 10% Off on App Orders • Limited Time Sale</em></span>
+    <span><em>Free Shipping Above ₹299 • Shop Top Brands</em></span>
+    <span><em>The Future is Here • Shop Next-Gen Devices & Accessories</em></span>
+    <span><em>Upgrade Your Gear • Latest Tech at Unbeatable Prices</em></span>
+    <span><em>No-Cost EMI Available • Get Your Tech Today</em></span>
+  </div>
+
+</div>
             </div>
           </div>
         </div>
@@ -51,7 +63,6 @@ export default function Banner() {
                 }`}
                 style={{ backgroundImage: `url('${img}')` }}
               >
-                {/* Fixed Overlay: Ensures text readability across all images */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
               </div>
             ))}
@@ -59,24 +70,24 @@ export default function Banner() {
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-8 w-full text-white">
             <div className="text-left">
-              <p className="text-xs sm:text-sm font-semibold text-[#FC2779] uppercase tracking-wide mb-2">
+              <p className="text-xs sm:text-sm font-semibold text-[#FC2779] uppercase tracking-wide mx-5">
                 Biggest Sale
               </p>
               
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+              <h1 className="text-3xl mx-5 sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 Up To <span className="text-[#FC2779]">40% Off</span>
                 <br />
                 On Electronics
               </h1>
               
-              <p className="text-sm sm:text-base md:text-lg text-gray-200 mb-6 max-w-md">
+              <p className="text-sm sm:text-base md:text-lg text-gray-200 mx-5 max-w-md">
                 Get deals on Phones, Laptops & Accessories. High-performance gear at unbeatable prices.
               </p>
               
               <Link
                 to="/store/products"
                 className="inline-block bg-[#FC2779] text-white px-8 py-3 rounded-md font-semibold shadow-lg 
-                hover:bg-[#d62066] hover:scale-105 transition-all duration-300"
+                hover:bg-[#d62066] hover:scale-105 transition-all duration-300 mx-5"
               >
                 Shop Now
               </Link>

@@ -15,11 +15,12 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (email, password, role) => {
   const response = await fetch("http://localhost:5000/api/auth/Login", {
     method: "POST",
+    credentials: 'include',
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email, password, role }),
   });
 
   const data = await response.json();
@@ -30,9 +31,10 @@ export const AuthProvider = ({ children }) => {
 
   const userData = {
     id: data.user.id,
-    name: data.user.firstName,
+    name: `${data.user.firstName} ${data.user.lastName}`,
     email: data.user.email,
     role: data.user.role,
+    profileImage: data.user.profile_picture,
   };
 
   setUser(userData);
@@ -43,10 +45,10 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (firstName, lastName, email, password) => {
     try {
-      const response = await fetch('http://localhost:5000/api/Signup', {
+      const response = await fetch('http://localhost:5000/api/auth/Signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName, lastName, email, password }),
+        body: JSON.stringify({ firstName, lastName, email, password}),
       });
 
       const data = await response.json();
@@ -54,14 +56,13 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const userData = {
           id: data.user.id,
-          name: firstName,
+          name: `${data.user.firstName} ${data.user.lastName}`,
           email: data.user.email,
           role: data.user.role,
-          profileImage: "/profileimage.jpg"
+          profileImage: data.user.profile_picture || '/profileimage.jpg'
         };
         setUser(userData);
         localStorage.setItem("shop_user", JSON.stringify(userData));
-
         return { success: true, user: userData };
       } else {
         return { success: false, error: data.message };

@@ -14,21 +14,28 @@ const AddProduct = () => {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => setFormData({ ...formData, image: reader.result });
-    if (file) reader.readAsDataURL(file);
+  const handleImageChange = (e)=>{
+    setFormData({...formData, image: e.target.files[0]});
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const form = new FormData();
+  form.append("name", formData.name);
+  form.append("category", formData.category);
+  form.append("brand", formData.brand);
+  form.append("price", formData.price);
+  form.append("description", formData.description);
+  form.append("stock", formData.stock);
+  form.append("image", formData.image);
+
     try {
       const response = await fetch("http://localhost:5000/api/products/add", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: form,
       });
+      console.log('Form image:', formData.image);
       if (response.ok) {
         alert("Product added successfully!");
         setFormData({

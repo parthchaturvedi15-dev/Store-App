@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 export default function Login({ closeModal }) {
 
@@ -17,7 +18,8 @@ export default function Login({ closeModal }) {
         e.preventDefault();
 
         try {
-            const result = await login(email, password);
+            const result = await login(email, password, role);
+            console.log('Login result:', result);
 
             if (result.success) {
                 toast.success('Login successful');
@@ -102,6 +104,16 @@ export default function Login({ closeModal }) {
                             Login
                         </button>
                     </form>
+                    <section className='py-6'>
+                    <div>
+                        <p className='text-xs text-center font-extralight text-gray-100'>Haven't got an account click on signup</p>
+                        <Link to="/SignUp">
+                        <button type='button' className='w-full bg-blue-800 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg mt-4'>
+                            Sign Up
+                            </button>
+                            </Link>
+                    </div>
+                    </section>
                 </section>
             </div>
             </div>

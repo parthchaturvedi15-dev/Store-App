@@ -61,19 +61,22 @@ export default function SignUp() {
 
     try {
       await SignupSchema.validate(formData, { abortEarly: false });
+      
+      const formDatatoSend = new FormData();
+      formDatatoSend.append('firstName', formData.fName);
+      formDatatoSend.append('lastName', formData.lName);
+      formDatatoSend.append('email', formData.email);
+      formDatatoSend.append('password', formData.password);
+      formDatatoSend.append('role', formData.role);
+      if(formData.profile_picture){
+        formDatatoSend.append('profile_picture', formData.profile_picture);
+      }
 
       const response = await fetch('http://localhost:5000/api/auth/signup',{
         method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName: formData.fName,
-          lastName: formData.lName,
-          email: formData.email,
-          password: formData.password,
-        }),
+        body: formDatatoSend,
       });
+
       const data = await response.json();
 
       if(!response.ok){
@@ -89,6 +92,7 @@ export default function SignUp() {
         password: '',
         confirmPassword: '',
         profile_picture: '',
+        role: '',
       });
     } catch (error) {
       if (error.inner) {
@@ -134,7 +138,6 @@ export default function SignUp() {
                     : 'border-gray-300 focus:ring-2 focus:ring-blue-500'
                 }`}
             />
-
             {errors[field.name] && (
               <span className="text-red-400 text-xs">
                 {errors[field.name]}
@@ -142,14 +145,36 @@ export default function SignUp() {
             )}
           </div>
         ))}
-
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all hover:scale-[1.02]"
-        >
-          Register
-        </button>
-      </form>
-    </div>
-  );
-}
+        <div className="flex flex-col gap-1">
+          <label htmlFor="profile_picture" className="text-xs font-medium text-gray-300">
+            Profile Picture
+            </label>
+            <input type="file" id="profile_picture" accept="image/*" onChange={(e) =>
+            setFormData((prev) => ({...prev,profile_picture: e.target.files[0],}))}
+            className="text-white text-sm"/>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-10 mt-4">
+              <label htmlFor="role" className="text-md font-light text-white">Role</label>
+              <select id="role" name="role" value={formData.role} onChange={(e) =>setFormData((prev) => ({
+                ...prev,role: e.target.value,}))} className="w-fit bg-black text-white 
+                border border-gray-300 rounded-lg px-3 py-2 text-sm 
+                focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all 
+                duration-200">
+                  <option value="">Select Role</option>
+                  <option value="admin">Admin</option>
+                  <option value="customer">Customer</option>
+                  </select>
+                  </div>
+                  
+                  <button
+                  type="submit"
+          className="w-full bg-blue-600 text-white py-2.5 
+          rounded-lg font-semibold hover:bg-blue-700 
+          transition-all hover:scale-[1.02]">
+            Register
+            </button>
+            </form>
+            </div>
+            );
+          }

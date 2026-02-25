@@ -13,6 +13,11 @@ export default function HeroSection() {
     { title: "Tablets", subtitle: "Creativity on the Go", image: "tablets.avif" },
     { title: "Cameras", subtitle: "Capture Every Moment", image: "cameras.avif" },
     { title: "Accessories", subtitle: "Essential Tech Gear", image: "accessories.avif" },
+    { title: "Smart Home", subtitle: "Automate Your Living", image: "smarthome.avif" },
+    { title: "Storage", subtitle: "Keep Your Data Safe", image: "storage.avif" },
+    { title: "Monitors", subtitle: "Crystal Clear Displays", image: "monitors.avif" },
+    { title: "Printers", subtitle: "Efficient Office Solutions", image: "printers.avif" },
+    { title: "Networking", subtitle: "Seamless Connectivity", image: "networking.avif"},
   ];
 
   const scrollRef = useRef(null);
@@ -29,12 +34,11 @@ export default function HeroSection() {
 
   return (
     <section className="py-8 bg-white dark:bg-black transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-10 lg:px-15 relative overflow-hidden">
 
-        {/* Desktop Arrow*/}
           <button
           onClick={() => scroll("left")}
-          className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-30 
+          className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-30 
                      bg-black/80 dark:bg-white/80 backdrop-blur-md 
                      text-white dark:text-black 
                      rounded-full p-2 shadow-lg 
@@ -46,20 +50,21 @@ export default function HeroSection() {
 
           <div
           ref={scrollRef}
-          className="flex gap-6 sm:gap-8 overflow-x-auto scroll-smooth py-6 
+          className="flex gap-6 sm:gap-3 overflow-x-auto scroll-smooth py-6 
                      scrollbar-hide snap-x snap-mandatory"
         >
           {heroImages.map((item, index) => (
             <Link
               key={index}
               to={`/store/category/${item.title.toLowerCase()}`}
-              className="flex flex-col items-center shrink-0 w-[120px] md:w-auto
-                         snap-start group transition"
+              className="flex flex-col items-center shrink-0 
+              w-1/5 sm:w-1/4 lg:w-1/5
+              snap-start group transition"
             >
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 
+                className="w-22 h-22 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-30 lg:h-30 
                            object-cover rounded-full 
                            border-2 border-gray-300 dark:border-white 
                            shadow-md
@@ -79,7 +84,7 @@ export default function HeroSection() {
             ))}
       <button
           onClick={() => scroll("right")}
-          className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-30 
+          className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-30 
                      bg-black/80 dark:bg-white/80 backdrop-blur-md 
                      text-white dark:text-black 
                      rounded-full p-2 shadow-lg 

@@ -2,16 +2,18 @@ import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import ProductPageLayout from '../../Components/ProductPageLayout';
 import { useOutletContext } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
+
 
 const CategoryPage = ()=>{
     const {categoryName}=useParams();
     const [products, setProducts]=useState([]);
     const [loading, setLoading]=useState(true);
     const {filters} =useOutletContext();
-    console.log("CategoryPage mounted");
-
+    const { addToCart } = useCart();
 
     useEffect(() => {
+      window.scrollTo(0,0);
   const fetchCategoryProducts = async () => {
     setLoading(true);
 
@@ -58,7 +60,7 @@ const query = new URLSearchParams(cleanFilters).toString();
 
     return(
         <>
-        <div className='min-h-screen bg-black text-white p-8 scroll-auto'>
+        <div className='min-h-screen bg-black text-white p-8 '>
             <h1 className='text-4xl font-bold capitalize mb-8 border-b border-gray-700 pb-4'>
                 {categoryName}
             </h1>
@@ -68,15 +70,25 @@ const query = new URLSearchParams(cleanFilters).toString();
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
                     {products.map((product)=>(
                         <div key={product._id} className='bg-gray-900 rounded-2xl p-4 hover:shadow-cyan-500/20 shadow-lg transition'>
-                       <img src={product.image}
+                       <img src={`http://localhost:5000/${product.image}`}
                        alt={product.name}
                        className='w-full h-48 object-cover rounded-xl mb-4'/>
                        <h2 className='text-xl font-semibold'>{product.name}</h2>
-                       <p className='text-gray-400 text-sm mb-4'>{product.description}</p>
+                       <div>{product.description.length>40?(
+                        <p>{product.description.substring(0, 40)}...<span className="text-cyan-400 ml-2 cursor-pointer">Read More</span>
+                        </p>
+                       ):(
+                        <p>{product.description}</p>
+                       )}
+                       </div>
                        <div className='flex justify-between items-center'>
                         <span className='text-cyan-400 font-bold text-lg'>{product.price}</span>
-                        <button className='bg-cyan-600 hover:g-cyan-500 px-4 py-2 rounded-lg text-sm transition'>Add to Cart
-                        </button>
+                        <button 
+                                    onClick={() => addToCart(product, 1)}
+                                    className='bg-cyan-600 hover:bg-cyan-500 px-4 py-2 rounded-lg text-sm transition font-bold'
+                                >
+                                    Add to Cart
+                                </button>
                         </div>
                         </div>
                         ))}

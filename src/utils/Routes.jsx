@@ -12,6 +12,9 @@ import Profile from "../pages/Profile";
 import ProtectedRoute from "../Components/ProtectedRoute";
 import ProductPageLayout from '../Components/ProductPageLayout';
 import CustomerCount from "../Components/CustomerCount";
+import EditProfile from "../Components/ProfileEdit";
+import ProductDetail from "../store/pages/ProductsDetails";
+import Order from "../Components/Order";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +38,6 @@ const router = createBrowserRouter([
       index: true,
       element: <Catalogue />,
     },
-
     {
       element: <ProductPageLayout />,
       children: [
@@ -49,8 +51,13 @@ const router = createBrowserRouter([
         },
       ],
     },
+    {
+      path: "product/:productId",
+      element: <ProductDetail />,
+    },
   ],
 },
+
 
   {
     path: "/admin",
@@ -83,6 +90,16 @@ const router = createBrowserRouter([
         <Profile />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: '/profile/ProfileEdit',
+    element: (
+      <EditProfile/>
+    ),
+  },
+  {
+    path: 'profile/Orders',
+    element: <Order/>,
   },
 ]);
 
